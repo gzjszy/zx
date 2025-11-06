@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>贵州建设职业技术学院 - 优读剧场邀请函</title>
+    <style>
+        /* 全局战争年代风格设置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "SimSun", "宋体", serif;
+        }
+        body, html { 
+            height: 100%; 
+            overflow: hidden; 
+        }
+        body {
+            background-color: #1a1a1a;
+            color: #f0e6d2;
+            line-height: 1.8;
+            background-image: url("images/tu1.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-blend-mode: overlay;
+            background-color: #2c2820;
+        }
+        .page-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            touch-action: pan-y; /* 优化触摸滑动 */
+            position: relative; /* 为动态提示定位 */
+        }
+        .page-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 4px !important; /* 进一步减小页面内边距 */
+            transition: opacity 0.3s ease; /* 翻页过渡动画 */
+        }
+        .page-status {
+            padding: 8px 0; /* 进一步缩小状态条高度 */
+            text-align: center;
+            color: #d4af37;
+            font-size: 11px; /* 缩小状态文字 */
+            background: rgba(26, 24, 21, 0.95);
+            border-top: 1px solid #8b4513;
+        }
+        .mask {
+            width: 100%;
+            min-height: 100%;
+            background-color: rgba(15, 15, 15, 0.85);
+            padding: 12px 4px !important; /* 进一步减小遮罩边距 */
+        }
+        .invitation {
+            max-width: 100%; /* 取消最大宽度限制，铺满屏幕 */
+            width: 100%;
+            margin: 0 auto;
+            border: 1px solid #8b4513; /* 所有页面统一边框样式 */
+            padding: 15px 8px !important; /* 所有页面统一内边距 */
+            background-color: rgba(26, 24, 21, 0.95);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+            position: relative;
+        }
+        /* 第一页校徽和学校名称容器 */
+        .school-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        .school-logo {
+            width: 40px !important; /* 校徽尺寸（根据实际调整） */
+            height: 40px !important;
+            margin-right: 10px;
+            border: 1px solid #8b4513;
+            border-radius: 50%; /* 校徽圆形裁剪（如果校徽是方形可去掉） */
+            object-fit: cover;
+        }
+        .school-name {
+            font-size: 1.1rem;
+            color: #d4af37;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        }
+        .invitation::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%238b4513' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.2; /* 降低纹理透明度，不干扰内容 */
+            z-index: 0;
+        }
+        .title-section {
+            text-align: center;
+            margin-bottom: 20px; /* 进一步减小区块间距 */
+            position: relative;
+            z-index: 1;
+        }
+        .title-section h1 {
+            font-size: 1.5rem; /* 适当调整标题大小 */
+            color: #d4af37;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            letter-spacing: 1px; /* 进一步减小字间距 */
+            transition: text-shadow 0.3s ease;
+        }
+        .title-section h1:hover {
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        }
+        .title-section h2 {
+            font-size: 1.1rem; /* 调整副标题大小 */
+            color: #f0e6d2;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #8b4513;
+            padding-bottom: 4px;
+            display: inline-block;
+        }
+        .title-section p {
+            font-size: 0.85rem; /* 调整说明文字 */
+            color: #d9c8a9;
+            padding: 0 3px; /* 最小化左右内边距 */
+        }
+        .section {
+            margin-bottom: 20px; /* 进一步减小区块间距 */
+            position: relative;
+            z-index: 1;
+        }
+        /* 第二页、第六页、第七页内容居中样式（保持统一布局逻辑） */
+        .page[data-page="2"] .section,
+        .page[data-page="6"] .section,
+        .page[data-page="7"] .section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 120px); /* 占满页面高度（减去边距和状态条） */
+            width: 100%;
+        }
+        /* 邀请函专用容器样式（第二页、第七页共用） */
+        .invite-container {
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 15px 0;
+        }
+        /* 邀请函标准排版样式 */
+        .invite-container .salutation { /* 称谓 */
+            font-size: 1.05rem;
+            color: #f0e6d2;
+            margin-bottom: 25px;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        .invite-container .body { /* 正文 */
+            font-size: 0.95rem;
+            color: #f0e6d2;
+            line-height: 1.9;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        .invite-container .body p {
+            margin-bottom: 15px;
+        }
+        .invite-container .closing { /* 祝颂语 */
+            font-size: 0.95rem;
+            color: #f0e6d2;
+            margin-bottom: 40px;
+            text-align: left;
+            padding-left: 0;
+        }
+        /* 第二页和第七页落款样式（邀请函标准右对齐） */
+        .signature {
+            margin-top: 30px;
+            text-align: right;
+            font-size: 0.95rem;
+            color: #f0e6d2;
+        }
+        .signature .host { /* 邀请方 */
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .signature .date { /* 日期 */
+            margin-bottom: 5px;
+        }
+        /* 第七页底部信息样式 */
+        .page[data-page="7"] .footer-section {
+            margin-top: 20px !important;
+            margin-bottom: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        .page[data-page="7"] .footer-section p {
+            text-align: center;
+            font-size: 0.95rem;
+            color: #d4af37;
+            margin-bottom: 8px;
+        }
+        /* 第六页样式保持不变 */
+        .page[data-page="6"] .section p {
+            text-indent: 0; /* 第六页保持居中无缩进 */
+            max-width: 90%; /* 限制最大宽度，避免文字过宽 */
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        .page[data-page="6"] .time-table {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 95%; /* 表格自适应宽度 */
+        }
+        .section-title {
+            font-size: 1.05rem; /* 调整section标题 */
+            color: #d4af37;
+            margin-bottom: 20px; /* 增加标题下方间距 */
+            border-left: none; /* 取消左边框，统一风格 */
+            padding-left: 0;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+        }
+        /* 调整section-title样式（统一第二页、第六页、第七页） */
+        .page[data-page="2"] .section-title,
+        .page[data-page="7"] .section-title,
+        .page[data-page="6"] .section-title {
+            border-left: none;
+            padding-left: 0;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+        }
+        /* 标题下划线样式 */
+        .page[data-page="2"] .section-title::after,
+        .page[data-page="7"] .section-title::after,
+        .page[data-page="6"] .section-title::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 1px;
+            background-color: #8b4513;
+            bottom: -8px;
+        }
+        .page[data-page="2"] .section-title:hover::after,
+        .page[data-page="7"] .section-title:hover::after,
+        .page[data-page="6"] .section-title:hover::after {
+            width: 80%;
+            background-color: #d4af37;
+        }
+        /* 其他页面正文样式（不影响邀请函页面） */
+        .section p {
+            font-size: 0.9rem; /* 适当调整正文大小，保证可读性 */
+            margin-bottom: 10px; /* 进一步减小段落间距 */
+            text-indent: 2em;
+            transition: color 0.3s ease;
+            line-height: 1.6; /* 调整行高 */
+            padding: 0 2px; /* 最小化内边距 */
+        }
+        .section p:hover {
+            color: #fff;
+        }
+        .content-card {
+            background-color: rgba(44, 41, 36, 0.75);
+            border: 1px solid #8b4513;
+            padding: 12px 8px !important; /* 进一步减小卡片内边距 */
+            margin-bottom: 15px; /* 进一步减小卡片间距 */
+            border-radius: 2px;
+            transition: all 0.5s ease;
+        }
+        .content-card:hover {
+            transform: translateY(-1px); /* 减小悬浮位移 */
+            box-shadow: 0 2px 10px rgba(139, 69, 19, 0.5);
+            border-color: #d4af37;
+        }
+        .content-card h3 {
+            font-size: 1.0rem; /* 调整卡片标题 */
+            color: #d4af37;
+            margin-bottom: 8px; /* 进一步减小间距 */
+            border-bottom: 1px dashed #8b4513;
+            padding-bottom: 4px; /* 进一步减小内边距 */
+            transition: all 0.3s ease;
+        }
+        .content-card:hover h3 {
+            border-color: #d4af37;
+            letter-spacing: 0.2px; /* 进一步减小字间距 */
+        }
+        .content-card p {
+            font-size: 0.88rem; /* 调整卡片正文 */
+            margin-bottom: 8px; /* 进一步减小段落间距 */
+            transition: color 0.3s ease;
+            line-height: 1.6;
+        }
+        .content-card:hover p {
+            color: #fff;
+        }
+        /* 重点优化：图片容器和图片尺寸（进一步放大） */
+        .img-container {
+            width: 100% !important;
+            margin: 10px -4px !important; /* 加大负边距，让图片更贴边 */
+            padding: 2px !important; /* 进一步减小内边距 */
+            border: 1px solid #8b4513;
+            background-color: rgba(44, 41, 36, 0.6);
+            min-height: 260px !important; /* 大幅提高最小高度，进一步放大图片区域 */
+            max-height: 400px; /* 提高最大高度限制 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        .img-container:hover {
+            border-color: #d4af37;
+            transform: scale(1.005); /* 极轻微缩放 */
+        }
+        .event-img, .content-img {
+            width: 100% !important;
+            height: 100% !important;
+            max-width: 100% !important;
+            max-height: 390px !important; /* 匹配容器最大高度 */
+            display: block;
+            object-fit: cover !important; /* 覆盖填充，保证图片铺满容器 */
+            border: 1px solid #6b3a10;
+            opacity: 0;
+            transition: opacity 1s ease-in-out, transform 0.8s ease;
+        }
+        .event-img.loaded, .content-img.loaded {
+            opacity: 1;
+        }
+        .img-container:hover .event-img,
+        .img-container:hover .content-img {
+            transform: scale(1.01); /* 极轻微缩放，增强视觉效果 */
+        }
+        .img-loading {
+            position: absolute;
+            color: #d9c8a9;
+            font-size: 0.8rem; /* 调整加载文字 */
+            z-index: 0;
+            animation: pulse 1.5s infinite;
+        }
+        .img-error {
+            position: absolute;
+            color: #d4af37;
+            font-size: 0.75rem; /* 调整错误文字 */
+            text-align: center;
+            padding: 0 3px;
+            z-index: 1;
+            display: none;
+            line-height: 1.5;
+        }
+        .time-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px; /* 进一步减小间距 */
+            font-size: 0.85rem; /* 调整表格文字，保证可读性 */
+        }
+        .time-table th, .time-table td {
+            border: 1px solid #8b4513;
+            padding: 5px 2px !important; /* 进一步减小表格内边距 */
+            text-align: center;
+            transition: all 0.3s ease;
+            white-space: nowrap; /* 防止表格文字换行 */
+        }
+        .time-table th {
+            background-color: rgba(139, 69, 19, 0.35);
+            color: #d4af37;
+            font-size: 0.88rem; /* 调整表头文字 */
+        }
+        .time-table tr:hover td {
+            background-color: rgba(64, 58, 49, 0.8);
+            color: #fff;
+            border-color: #d4af37;
+        }
+        .time-table td {
+            background-color: rgba(44, 41, 36, 0.55);
+        }
+        .footer-section {
+            text-align: center;
+            margin-bottom: 10px; /* 进一步减小间距 */
+            position: relative;
+            z-index: 1;
+        }
+        .footer-section p {
+            font-size: 0.9rem; /* 调整底部文字 */
+            margin-bottom: 4px; /* 进一步减小间距 */
+            transition: color 0.3s ease;
+            padding: 0 3px; /* 最小化内边距 */
+        }
+        .footer-section .host {
+            font-size: 0.95rem; /* 调整主办方文字 */
+            color: #d4af37;
+            margin-top: 10px; /* 进一步减小间距 */
+        }
+        /* 重点优化：极致缩小翻页提示按钮 */
+        .scroll-tip {
+            position: absolute;
+            bottom: 45px; /* 上移，进一步减少占用空间 */
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #d4af37;
+            font-size: 8px !important; /* 极致缩小提示文字 */
+            z-index: 10;
+            animation: fadeUp 1.5s infinite ease-in-out;
+            cursor: pointer;
+            padding: 3px 6px !important; /* 极致减小点击区域 */
+            border-radius: 2px;
+            transition: background-color 0.3s ease;
+        }
+        .scroll-arrow {
+            width: 12px !important; /* 极致缩小箭头 */
+            height: 12px !important;
+            border-bottom: 1px solid #d4af37; /* 极致减细箭头边框 */
+            border-right: 1px solid #d4af37;
+            transform: rotate(45deg);
+            margin-bottom: 2px !important; /* 极致减小箭头与文字间距 */
+            transition: transform 0.3s ease;
+        }
+        .scroll-tip:active .scroll-arrow {
+            transform: rotate(45deg) scale(0.7); /* 调整点击缩放 */
+        }
+        @keyframes fadeUp {
+            0% { 
+                opacity: 0.6; 
+                transform: translateX(-50%) translateY(0); 
+            }
+            50% { 
+                opacity: 0.9; 
+                transform: translateX(-50%) translateY(-3px); /* 极致减小浮动距离 */
+            }
+            100% { 
+                opacity: 0.6; 
+                transform: translateX(-50%) translateY(0); 
+            }
+        }
+        /* 最后一页隐藏翻页提示 */
+        .page[data-page="7"] ~ .scroll-tip {
+            display: none;
+        }
+        /* 音乐控制按钮样式 */
+        .music-control {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 20;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(139, 69, 19, 0.7);
+            border: 1px solid #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+        .music-control:hover {
+            background-color: rgba(212, 175, 55, 0.3);
+            transform: scale(1.05);
+            border-color: #f0e6d2;
+        }
+        .music-icon {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            transition: all 0.3s ease;
+        }
+        /* 播放图标 */
+        .music-icon.play {
+            border-width: 8px 0 8px 14px;
+            border-color: transparent transparent transparent #d4af37;
+            margin-left: 3px;
+        }
+        /* 暂停图标 */
+        .music-icon.pause {
+            width: 14px;
+            height: 16px;
+            border-style: none;
+            position: relative;
+        }
+        .music-icon.pause::before,
+        .music-icon.pause::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 16px;
+            background-color: #d4af37;
+        }
+        .music-icon.pause::before {
+            left: 0;
+        }
+        .music-icon.pause::after {
+            right: 0;
+        }
+        /* 音频状态提示（优化样式和位置） */
+        .music-status {
+            position: absolute;
+            top: 55px;
+            right: 15px;
+            z-index: 20;
+            color: #d4af37;
+            font-size: 10px;
+            background-color: rgba(26, 24, 21, 0.8);
+            padding: 2px 6px;
+            border-radius: 3px;
+            border: 1px solid #8b4513;
+            white-space: nowrap;
+            display: none;
+        }
+        /* 音频加载进度条（新增） */
+        .music-progress {
+            position: absolute;
+            top: 50px;
+            right: 15px;
+            z-index: 19;
+            width: 36px;
+            height: 3px;
+            background-color: rgba(44, 41, 36, 0.8);
+            border-radius: 2px;
+            overflow: hidden;
+            display: none;
+        }
+        .music-progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: #d4af37;
+            transition: width 0.3s ease;
+        }
+        /* 桌面端适配（大屏恢复原有比例） */
+        @media (min-width: 768px) {
+            .page-content {
+                padding: 20px !important;
+            }
+            .page-status {
+                padding: 15px 0;
+                font-size: 14px;
+            }
+            .mask {
+                padding: 40px 20px !important;
+            }
+            .invitation {
+                border: 2px solid #8b4513;
+                padding: 50px !important;
+                max-width: 1000px !important;
+            }
+            /* 桌面端校徽和学校名称调整 */
+            .school-header {
+                margin-bottom: 30px;
+            }
+            .school-logo {
+                width: 60px !important;
+                height: 60px !important;
+                margin-right: 15px;
+            }
+            .school-name {
+                font-size: 1.5rem;
+                letter-spacing: 3px;
+            }
+            .invitation::before {
+                opacity: 0.3;
+            }
+            .title-section {
+                margin-bottom: 60px;
+            }
+            .title-section h1 {
+                font-size: 2.5rem;
+                margin-bottom: 20px;
+                letter-spacing: 5px;
+            }
+            .title-section h2 {
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+                padding-bottom: 10px;
+            }
+            .title-section p {
+                font-size: 1.1rem;
+                padding: 0;
+                margin-bottom: 10px;
+            }
+            .section {
+                margin-bottom: 50px;
+            }
+            /* 桌面端内容居中调整 */
+            .page[data-page="2"] .section,
+            .page[data-page="6"] .section,
+            .page[data-page="7"] .section {
+                min-height: calc(100vh - 200px);
+            }
+            .page[data-page="6"] .time-table {
+                max-width: 70%;
+            }
+            .invite-container {
+                width: 80%;
+                max-width: 700px;
+                padding: 20px 0;
+                padding-top: 5px;
+            }
+            /* 桌面端邀请函排版优化 */
+            .invite-container .salutation {
+                font-size: 1.2rem;
+                margin-bottom: 30px;
+                margin-top: 15px;
+            }
+            .invite-container .body {
+                font-size: 1.1rem;
+                line-height: 2.0;
+                margin-bottom: 40px;
+            }
+            .invite-container .body p {
+                margin-bottom: 20px;
+            }
+            .invite-container .closing {
+                font-size: 1.1rem;
+                margin-bottom: 50px;
+            }
+            .signature {
+                font-size: 1.1rem;
+            }
+            .signature .host {
+                margin-bottom: 10px;
+            }
+            .section-title {
+                font-size: 1.5rem;
+                margin-bottom: 30px;
+            }
+            /* 桌面端section-title样式 */
+            .page[data-page="2"] .section-title,
+            .page[data-page="7"] .section-title,
+            .page[data-page="6"] .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 35px;
+            }
+            .page[data-page="2"] .section-title::after,
+            .page[data-page="7"] .section-title::after,
+            .page[data-page="6"] .section-title::after {
+                bottom: -12px;
+                height: 2px;
+            }
+            .section p {
+                font-size: 1.1rem;
+                margin-bottom: 20px;
+                line-height: 1.8;
+                padding: 0;
+            }
+            .content-card {
+                padding: 30px !important;
+                margin-bottom: 30px;
+            }
+            .content-card:hover {
+                transform: translateY(-5px);
+            }
+            .content-card h3 {
+                font-size: 1.3rem;
+                margin-bottom: 15px;
+                padding-bottom: 10px;
+            }
+            .content-card:hover h3 {
+                letter-spacing: 1px;
+            }
+            .content-card p {
+                font-size: 1rem;
+                margin-bottom: 15px;
+                line-height: 1.8;
+            }
+            .img-container {
+                margin: 20px 0 !important;
+                padding: 5px !important;
+                min-height: 280px !important;
+                max-height: none !important;
+            }
+            .img-container:hover {
+                transform: scale(1.02);
+            }
+            .event-img, .content-img {
+                max-width: 600px !important;
+                max-height: none !important;
+                object-fit: contain !important;
+            }
+            .img-container:hover .event-img,
+            .img-container:hover .content-img {
+                transform: scale(1.05);
+            }
+            .img-loading {
+                font-size: 1rem;
+            }
+            .img-error {
+                font-size: 0.9rem;
+            }
+            .time-table {
+                margin-top: 20px;
+                font-size: 1rem;
+            }
+            .time-table th, .time-table td {
+                padding: 15px !important;
+            }
+            .time-table th {
+                font-size: 1.1rem;
+            }
+            .footer-section {
+                margin-bottom: 30px;
+            }
+            .page[data-page="7"] .footer-section {
+                margin-top: 30px !important;
+            }
+            .footer-section p {
+                font-size: 1.1rem;
+                margin-bottom: 10px;
+                padding: 0;
+            }
+            .footer-section .host {
+                font-size: 1.2rem;
+                margin-top: 30px;
+            }
+            .scroll-tip {
+                bottom: 80px;
+                font-size: 14px !important;
+                padding: 10px !important;
+            }
+            .scroll-arrow {
+                width: 28px !important;
+                height: 28px !important;
+                border-bottom: 2px solid #d4af37;
+                border-right: 2px solid #d4af37;
+                margin-bottom: 8px !important;
+            }
+            .scroll-tip:active .scroll-arrow {
+                transform: rotate(45deg) scale(0.9);
+            }
+            @keyframes fadeUp {
+                0% { 
+                    opacity: 0.6; 
+                    transform: translateX(-50%) translateY(0); 
+                }
+                50% { 
+                    opacity: 1; 
+                    transform: translateX(-50%) translateY(-10px); 
+                }
+                100% { 
+                    opacity: 0.6; 
+                    transform: translateX(-50%) translateY(0); 
+                }
+            }
+            /* 桌面端音频状态提示调整 */
+            .music-status {
+                font-size: 12px;
+                padding: 3px 8px;
+                top: 60px;
+            }
+            .music-progress {
+                width: 40px;
+                top: 55px;
+            }
+        }
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        /* 隐藏所有页面，只显示当前页 */
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container" id="container">
+        <!-- 音乐控制相关元素（优化结构） -->
+        <audio id="backgroundMusic" loop preload="metadata">
+            <!-- 增加备用音频格式，提升兼容性 -->
+            <source src="music/background-music.mp3" type="audio/mpeg">
+            <source src="music/background.ogg" type="audio/ogg">
+            您的浏览器不支持音频播放
+         </audio>
+        <!-- 音频加载进度条（新增） -->
+        <div class="music-progress" id="musicProgress">
+            <div class="music-progress-bar" id="musicProgressBar"></div>
+        </div>
+        <div class="music-control" id="musicControl">
+            <div class="music-icon play" id="musicIcon"></div>
+        </div>
+        <!-- 音频状态提示（合并加载/错误提示） -->
+        <div class="music-status" id="musicStatus"></div>
+        
+        <div class="page-content" id="content">
+            <!-- 第1页 -->
+            <div class="page active" data-page="1">
+                <div class="mask">
+                    <div class="invitation">
+                        <!-- 新增：学校名称和校徽 -->
+                        <div class="school-header">
+                            <img src="images/school-logo.png" alt="贵州建设职业技术学院校徽" class="school-logo" id="schoolLogo">
+                            <h3 class="school-name">贵州建设职业技术学院</h3>
+                        </div>
+                        
+                        <div class="title-section">
+                            <h1>优读剧场第二期</h1>
+                            <h2>《烽火卷书：黔州星火》邀请函</h2>
+                            <p>—— 典耀中华主题读书活动 ——</p>
+                        </div>
+                        <div class="section invite-section">
+                            <div class="invite-container">
+                                <div class="salutation">尊敬的李扬波书记：</div>
+                                <div class="body">
+                                    <p>为传承红色基因，弘扬革命精神，贵州建设职业技术学院图书馆特举办优读剧场第二期《烽火卷书：黔州星火》活动。本次活动以《贵阳史话》为蓝本，通过沉浸式表演再现黔州大地的革命岁月，让红色文化直抵人心。我们诚挚邀请您拨冗莅临，与全校师生共同感受革命先辈的家国情怀，在历史与现实的碰撞中汲取奋进力量。</p>
+                                    <p>活动时间：2025年11月12日 14:00</p>
+                                    <p>活动地点：图书馆三楼会议室</p>
+                                </div>
+                                <div class="signature">
+                                    <div class="host">贵州建设职业技术学院图书馆</div>
+                                    <div class="date">2025年11月6日</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第2页：标准邀请函格式（边框与其他页统一） -->
+            <div class="page" data-page="2">
+                <div class="mask">
+                    <div class="invitation">
+                        <div class="section intro-section">
+                            <h3 class="section-title">活动简介</h3>
+                            <p>优读剧场是贵州建设职业技术学院图书馆推出的系列沉浸式读书分享活动，是一种创新的阅读推广模式。该模式巧妙融合表演艺术，将书籍内容以更生动、直观的方式呈现给读者，不仅能提升读者的阅读体验，更能激发大家对历史和英雄主义主题的深刻思考。</p>
+                            <p>优读剧场第一期《烽火卷书：抗日的回响》演出后，在全校师生中获得良好反响。为进一步传承红色基因、弘扬革命精神，图书馆特推出第二期活动，聚焦黔州大地的革命历史，以《贵阳史话》为蓝本，再现烽火岁月中的英雄故事。</p>
+                            <div class="img-container">
+                                <span class="img-loading">活动主题图加载中...</span>
+                                <span class="img-error" id="error-tu1">非常抱歉，图片加载失败</span>
+                                <img src="images/tu1.jpg" alt="典耀中华主题读书活动之'时光共振优读剧场'标识" class="event-img" id="img-tu1">
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+
+            <!-- 原第2页 → 现第3页 -->
+            <div class="page" data-page="3">
+                <div class="mask">
+                    <div class="invitation">
+                        <div class="section content-section">
+                            <h3 class="section-title">核心内容呈现</h3>
+                            
+                            <div class="content-card">
+                                <h3>1. 林青就义：黔州革命的火种</h3>
+                                <p>1935年9月11日，中共贵州省工委书记林青在贵州监狱刑场上，面对死亡毫无畏惧，高呼“中国共产党万岁！”和“打倒国民党反动派！”。这位年仅24岁的共产党员，用生命践行了革命信仰，他的牺牲如星火般照亮了黔州大地的革命道路。</p>
+                                <p>林青，原名李远方，1911年4月20日生于毕节七星关区贫农家庭。1930年赴上海，1931年在沪东区团委参与革命工作；1934年1月，与缪正元共同介绍秦天真入党，并组建党支部担任书记；1935年7月19日，因叛徒出卖不幸被捕，最终英勇就义。</p>
+                                <div class="img-container">
+                                    <span class="img-loading">林青生平图加载中...</span>
+                                    <span class="img-error" id="error-tu3">非常抱歉，图片加载失败</span>
+                                    <img src="images/tu3.jpg" alt="林青同志生平事迹" class="content-img" id="img-tu3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 原第3页 → 现第4页 -->
+            <div class="page" data-page="4">
+                <div class="mask">
+                    <div class="invitation">
+                        <div class="section content-section">
+                            <div class="content-card">
+                                <h3>2. 贵阳民众革命：觉醒的力量</h3>
+                                <p>五四运动期间，北京学生联合会向各省学生发出通电号召，贵州军阀为遏制学生运动，极力封锁消息，下令各报馆不得登载外地运动动态。然而，北京学生的通电、传单等宣传品仍通过多种渠道传入贵阳，贵阳学生自发酝酿声援运动，市民也逐渐关注革命动向。</p>
+                                <p>在此背景下，筑光合唱团（贵阳）、贵阳沙陀业余话剧社等进步团体相继成立，成为传播革命思想、凝聚民众力量的重要载体，为黔州地区的革命运动注入了鲜活动力。</p>
+                                <div class="img-container">
+                                    <span class="img-loading">活动副标题图加载中...</span>
+                                    <span class="img-error" id="error-tu2">非常抱歉，图片加载失败</span>
+                                    <img src="images/tu2.jpg" alt="《贵阳史话》优读剧场第二期副标题标识" class="content-img" id="img-tu2">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 原第4页 → 现第5页 -->
+            <div class="page" data-page="5">
+                <div class="mask">
+                    <div class="invitation">
+                        <div class="section content-section">
+                            <div class="content-card">
+                                <h3>3. 忻口战役：铁血抗倭的担当</h3>
+                                <p>1937年，抗日战争全面爆发后两年，国民党第九军接到北上抗日命令。活动将聚焦一位追随郝梦龄上将北上的黔州籍战士，通过他的视角再现忻口战役的惨烈与悲壮。这位主角以自身牺牲打破了农民阶级的保守性枷锁，用热血诠释了“天下兴亡，匹夫有责”的民族大义。</p>
+                                <p>忻口战役是抗日战争中华北地区规模最大、战斗最激烈的一次战役，无数中华儿女前赴后继，用生命捍卫国家主权，此次片段呈现旨在缅怀先烈、传承抗倭精神。</p>
+                                <div class="img-container">
+                                    <span class="img-loading">历史场景图加载中...</span>
+                                    <span class="img-error" id="error-tu4">非常抱歉，图片加载失败</span>
+                                    <img src="images/tu4.jpg" alt="忻口战役历史场景辅助图" class="content-img" id="img-tu4">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 原第5页 → 现第6页 -->
+            <div class="page" data-page="6">
+                <div class="mask">
+                    <div class="invitation">
+                        <div class="section time-section">
+                            <h3 class="section-title">演出时间安排</h3>
+                            <table class="time-table">
+                                <thead>
+                                    <tr>
+                                        <th>场次</th>
+                                        <th>演出时间</th>
+                                        <th>备注</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>第一场</td>
+                                        <td>2025年11月10日 14:00</td>
+                                        <td>首演场</td>
+                                    </tr>
+                                    <tr>
+                                        <td>第二场</td>
+                                        <td>2025年11月11日 10:30</td>
+                                        <td>日间场</td>
+                                    </tr>
+                                    <tr>
+                                        <td>第三场</td>
+                                        <td>2025年11月11日 14:00</td>
+                                        <td>日间场</td>
+                                    </tr>
+                                    <tr>
+                                        <td>第四场</td>
+                                        <td>2025年11月12日 10:30</td>
+                                        <td>日间场</td>
+                                    </tr>
+                                    <tr>
+                                        <td>第五场</td>
+                                        <td>2025年11月12日 14:00</td>
+                                        <td>收官场</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第7页：正式邀请函格式（边框统一，内容规范） -->
+            <div class="page" data-page="7">
+                <div class="mask">
+                    <div class="invitation">
+                        <div class="section invitee-section">
+                            <h3 class="section-title">诚挚邀请</h3>
+                            <div class="invite-container">
+                                <div class="salutation">尊敬的各位领导、老师：</div>
+                                <div class="body">
+                                    <p>红色基因，薪火相传；黔州大地，英雄辈出。为深入学习贯彻习近平总书记关于传承红色基因的重要论述，丰富校园文化生活，贵州建设职业技术学院图书馆精心打造优读剧场第二期《烽火卷书：黔州星火》。</p>
+                                    <p>本次活动以沉浸式戏剧演绎为核心，再现林青就义、贵阳民众觉醒、忻口战役等经典历史场景，让观众穿越时空，感受革命先辈的坚定信仰与家国情怀。我们深信，这场红色文化盛宴，必将成为一次深刻的精神洗礼。</p>
+                                    <p>谨邀您拨冗出席，与我们一同在剧场中重温峥嵘岁月，在感悟历史中凝聚奋进力量，共同推动红色文化在校园落地生根、开花结果。</p>
+                                </div>
+                                <div class="closing">顺颂时祺！</div>
+                                <div class="signature">
+                                    <div class="host">贵州建设职业技术学院</div>
+                                    <div class="date">2025年11月6日</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="footer-section">
+                            <p>演出地点：贵州建设职业技术学院图书馆三楼会议室</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 底部状态条 -->
+        <div class="page-status" id="status">当前 1/7 页 · 5秒后自动翻页（点击箭头/上下滑动可切换）</div>
+        <!-- 动态翻页提示（极致缩小版） -->
+        <div class="scroll-tip" id="scrollTip">
+            <div class="scroll-arrow"></div>
+            <span>下页</span> <!-- 极致简化提示文字 -->
+        </div>
+    </div>
+
+    <script>
+        // 翻页配置（总页数更新为7）
+        const config = {
+            totalPages: 7,  // 总页数更新为7
+            interval: 10000, // 自动翻页间隔(ms)
+            currentPage: 1, // 当前页
+            startY: 0,      // 触摸起始Y坐标
+            autoTimer: null // 自动翻页定时器
+        };
+
+        // 初始化自动翻页
+        function startAutoPage() {
+            config.autoTimer = setInterval(() => {
+                nextPage();
+            }, config.interval);
+        }
+
+        // 下一页
+        function nextPage() {
+            config.currentPage = config.currentPage >= config.totalPages ? 1 : config.currentPage + 1;
+            updatePage();
+        }
+
+        // 上一页
+        function prevPage() {
+            config.currentPage = config.currentPage <= 1 ? config.totalPages : config.currentPage - 1;
+            updatePage();
+        }
+
+        // 更新页面（加过渡动画）
+        function updatePage() {
+            const content = document.getElementById('content');
+            content.style.opacity = 0;
+            
+            setTimeout(() => {
+                // 隐藏所有页面
+                document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                // 显示当前页
+                document.querySelector(`.page[data-page="${config.currentPage}"]`).classList.add('active');
+                // 更新状态文字（提示点击功能）
+                document.getElementById('status').innerText = `当前 ${config.currentPage}/${config.totalPages} 页 · （点击箭头/上下滑动可切换）`;
+                // 恢复透明度
+                content.style.opacity = 1;
+            }, 300);
+        }
+
+        // 触摸滑动逻辑
+        document.getElementById('container').addEventListener('touchstart', (e) => {
+            config.startY = e.touches[0].clientY;
+            clearInterval(config.autoTimer); // 触摸时暂停自动翻页
+        });
+
+        document.getElementById('container').addEventListener('touchend', (e) => {
+            const endY = e.changedTouches[0].clientY;
+            const diffY = endY - config.startY;
+            
+            // 滑动距离超过50px判定为有效滑动
+            if (diffY > 50) prevPage(); // 上滑（手指从下往上）
+            if (diffY < -50) nextPage(); // 下滑（手指从上往下）
+            
+            startAutoPage(); // 滑动结束后重启自动翻页
+        });
+
+        // 点击动态提示组件翻页
+        document.getElementById('scrollTip').addEventListener('click', () => {
+            clearInterval(config.autoTimer); // 点击时暂停自动翻页
+            nextPage(); // 直接跳转到下一页
+            startAutoPage(); // 翻页后重启自动翻页
+        });
+
+        // 图片加载处理
+        document.addEventListener('DOMContentLoaded', function() {
+            // 本地图片配置列表（已移除邀请页图片配置）
+            const localImageConfig = [
+                {
+                    imgId: 'schoolLogo',
+                    errorId: 'error-logo',
+                    localPath: 'images/school-logo.png',
+                    imgDesc: '学校校徽（school-logo.png）'
+                },
+                {
+                    imgId: 'img-tu1',
+                    errorId: 'error-tu1',
+                    localPath: 'images/tu1.jpg',
+                    imgDesc: '活动主题图（tu1.jpg）'
+                },
+                {
+                    imgId: 'img-tu2',
+                    errorId: 'error-tu2',
+                    localPath: 'images/tu2.jpg',
+                    imgDesc: '活动副标题图（tu2.jpg）'
+                },
+                {
+                    imgId: 'img-tu3',
+                    errorId: 'error-tu3',
+                    localPath: 'images/tu3.jpg',
+                    imgDesc: '林青生平图（tu3.jpg）'
+                },
+                {
+                    imgId: 'img-tu4',
+                    errorId: 'error-tu4',
+                    localPath: 'images/tu4.jpg',
+                    imgDesc: '历史场景图（tu4.jpg）'
+                }
+            ];
+
+            // 处理本地图片加载
+            function handleLocalImageLoad(config) {
+                const img = document.getElementById(config.imgId);
+                const errorEl = document.getElementById(config.errorId);
+                const loadingEl = img.parentElement.querySelector('.img-loading');
+
+                img.onload = function() {
+                    img.classList.add('loaded');
+                    if (loadingEl) loadingEl.style.display = 'none';
+                    console.log(`✅ 本地图片加载成功：${config.imgDesc}`);
+                };
+
+                img.onerror = function() {
+                    console.error(`❌ 本地图片加载失败：${config.imgDesc}`);
+                    if (loadingEl) loadingEl.style.display = 'none';
+                    // 校徽加载失败时显示文字占位
+                    if (config.imgId === 'schoolLogo') {
+                        img.style.display = 'none';
+                        const logoPlaceholder = document.createElement('span');
+                        logoPlaceholder.style.color = '#d4af37';
+                        logoPlaceholder.style.fontSize = '0.8rem';
+                        logoPlaceholder.textContent = '校徽';
+                        img.parentElement.insertBefore(logoPlaceholder, img);
+                    }
+                    if (errorEl) {
+                        errorEl.style.display = 'block';
+                        errorEl.innerHTML += "<br>提示：请确认图片为标准PNG格式，无损坏或格式篡改";
+                    }
+                };
+
+                if (img.complete) {
+                    img.onload();
+                }
+
+                if (img.src !== config.localPath) {
+                    img.src = config.localPath;
+                }
+            }
+
+            // 批量处理所有本地图片
+            localImageConfig.forEach(config => {
+                handleLocalImageLoad(config);
+            });
+
+            // 音乐播放优化逻辑
+            const audio = document.getElementById('backgroundMusic');
+            const musicControl = document.getElementById('musicControl');
+            const musicIcon = document.getElementById('musicIcon');
+            const musicStatus = document.getElementById('musicStatus');
+            const musicProgress = document.getElementById('musicProgress');
+            const musicProgressBar = document.getElementById('musicProgressBar');
+            
+            // 音频状态枚举
+            const AudioStatus = {
+                LOADING: 'loading',
+                PLAYING: 'playing',
+                PAUSED: 'paused',
+                ERROR: 'error'
+            };
+            
+            // 当前音频状态
+            let currentAudioStatus = AudioStatus.PAUSED;
+
+            // 更新音频状态显示
+            function updateAudioStatus(status, message = '') {
+                currentAudioStatus = status;
+                
+                switch(status) {
+                    case AudioStatus.LOADING:
+                        musicProgress.style.display = 'block';
+                        musicStatus.style.display = 'block';
+                        musicStatus.textContent = message || '加载中...';
+                        break;
+                    case AudioStatus.PLAYING:
+                        musicIcon.classList.remove('play');
+                        musicIcon.classList.add('pause');
+                        musicProgress.style.display = 'none';
+                        musicStatus.style.display = 'none';
+                        break;
+                    case AudioStatus.PAUSED:
+                        musicIcon.classList.remove('pause');
+                        musicIcon.classList.add('play');
+                        musicProgress.style.display = 'none';
+                        musicStatus.style.display = 'none';
+                        break;
+                    case AudioStatus.ERROR:
+                        musicIcon.classList.remove('pause');
+                        musicIcon.classList.add('play');
+                        musicProgress.style.display = 'none';
+                        musicStatus.style.display = 'block';
+                        musicStatus.textContent = message || '播放失败';
+                        break;
+                }
+            }
+
+            // 音频加载进度更新
+            audio.addEventListener('progress', function() {
+                if (audio.buffered.length > 0) {
+                    const loadedPercentage = (audio.buffered.end(audio.buffered.length - 1) / audio.duration) * 100;
+                    musicProgressBar.style.width = `${loadedPercentage}%`;
+                    
+                    // 加载完成后自动播放（如果浏览器允许）
+                    if (loadedPercentage >= 100 && currentAudioStatus === AudioStatus.LOADING) {
+                        tryPlayAudio();
+                    }
+                }
+            });
+
+            // 音频元数据加载完成
+            audio.addEventListener('loadedmetadata', function() {
+                console.log('🎵 音频元数据加载完成');
+                updateAudioStatus(AudioStatus.LOADING, '加载中...');
+            });
+
+            // 音频加载失败
+            audio.addEventListener('error', function() {
+                console.error('❌ 音频加载失败', audio.error);
+                let errorMsg = '播放失败';
+                switch(audio.error.code) {
+                    case MediaError.MEDIA_ERR_ABORTED:
+                        errorMsg = '加载被中止';
+                        break;
+                    case MediaError.MEDIA_ERR_NETWORK:
+                        errorMsg = '网络错误';
+                        break;
+                    case MediaError.MEDIA_ERR_DECODE:
+                        errorMsg = '格式不支持';
+                        break;
+                    case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
+                        errorMsg = '文件不支持';
+                        break;
+                }
+                updateAudioStatus(AudioStatus.ERROR, errorMsg);
+            });
+
+            // 音频播放结束（循环播放）
+            audio.addEventListener('ended', function() {
+                if (audio.loop) {
+                    audio.currentTime = 0;
+                    audio.play().catch(err => {
+                        console.log('⚠️ 循环播放失败', err);
+                        updateAudioStatus(AudioStatus.PAUSED);
+                    });
+                }
+            });
+
+            // 尝试播放音频
+            function tryPlayAudio() {
+                updateAudioStatus(AudioStatus.LOADING, '加载中...');
+                audio.play().then(() => {
+                    updateAudioStatus(AudioStatus.PLAYING);
+                    console.log('🎵 音乐播放成功');
+                }).catch(err => {
+                    console.log('⚠️ 播放失败', err);
+                    
+                    // 区分自动播放被阻止和其他错误
+                    if (err.name === 'NotAllowedError' || err.message.includes('autoplay') || err.message.includes('user interaction')) {
+                        updateAudioStatus(AudioStatus.PAUSED);
+                        // 显示"点击播放"提示（3秒后自动隐藏）
+                        musicStatus.style.display = 'block';
+                        musicStatus.textContent = '点击播放背景音乐';
+                        setTimeout(() => {
+                            if (currentAudioStatus === AudioStatus.PAUSED) {
+                                musicStatus.style.display = 'none';
+                            }
+                        }, 3000);
+                    } else {
+                        updateAudioStatus(AudioStatus.ERROR, '播放失败');
+                    }
+                });
+            }
+
+            // 音乐控制按钮点击事件
+            musicControl.addEventListener('click', () => {
+                if (currentAudioStatus === AudioStatus.PLAYING) {
+                    audio.pause();
+                    updateAudioStatus(AudioStatus.PAUSED);
+                    console.log('🎵 音乐暂停');
+                } else {
+                    tryPlayAudio();
+                }
+            });
+
+            // 页面任何位置点击都可触发播放（仅第一次）
+            let playInitiated = false;
+            document.body.addEventListener('click', function playOnClick() {
+                if (!playInitiated && currentAudioStatus === AudioStatus.PAUSED) {
+                    playInitiated = true;
+                    tryPlayAudio();
+                }
+            }, { once: true });
+
+            // 初始化音频（先加载元数据）
+            function initAudio() {
+                // 检查音频是否已加载
+                if (audio.readyState >= 1) {
+                    tryPlayAudio();
+                } else {
+                    // 触发元数据加载
+                    audio.load();
+                }
+            }
+
+            // 页面加载完成后初始化音频
+            initAudio();
+
+            // 初始化页面
+            updatePage();
+            startAutoPage();
+        });
+    </script>
+</body>
+</html>
